@@ -1,0 +1,10 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+*.log
+.env
+
+# Runtime outputs can be regenerated and may contain API experiment results.
+src/outputs/**/*.jsonl
+!src/outputs/**/.gitkeep

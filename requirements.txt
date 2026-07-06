@@ -1,0 +1,7 @@
+dashscope
+openai
+bootstrapped
+transformers
+jsonlines
+zhipuai
+torch
