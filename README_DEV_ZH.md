@@ -1,11 +1,8 @@
-# AI Hospital 二次开发说明
-
-本文档记录本地复现、DeepSeek 接入、病例扩展和上传 GitHub 的最小流程。
+# AI Hospital 
 
 ## 1. 环境准备
 
 ```cmd
-cd /d D:\project_code\AI_Hospital-main
 python -m pip install -r requirements.txt
 ```
 
@@ -20,7 +17,6 @@ set "PYTHONUTF8=1"
 本项目的 GPT 引擎使用 OpenAI SDK。DeepSeek 兼容 OpenAI API，因此可以复用 `OPENAI_API_KEY` 和 `OPENAI_API_BASE`。
 
 ```cmd
-cd /d D:\project_code\AI_Hospital-main\src
 set "OPENAI_API_KEY=你的DeepSeek_API_KEY"
 set "OPENAI_API_BASE=https://api.deepseek.com/v1"
 set "PYTHONUTF8=1"
@@ -35,7 +31,6 @@ python -c "from openai import OpenAI; import os; c=OpenAI(api_key=os.getenv('OPE
 ## 3. 最终病例集复现
 
 ```cmd
-cd /d D:\project_code\AI_Hospital-main\src
 scripts\run_deepseek_final.cmd
 ```
 
@@ -77,24 +72,3 @@ src\outputs\dialog_history_iiyi\dialog_history_deepseek_final.jsonl
 cd /d D:\project_code\AI_Hospital-main\src
 python scripts\validate_patients.py data\patients.json
 ```
-
-## 5. 上传到自己的 GitHub
-
-如果当前目录还不是 Git 仓库：
-
-```cmd
-cd /d D:\project_code\AI_Hospital-main
-git init
-git add .
-git commit -m "Improve AI Hospital reproduction workflow"
-```
-
-在 GitHub 创建一个空仓库后，绑定远程地址：
-
-```cmd
-git remote add origin https://github.com/你的用户名/你的仓库名.git
-git branch -M main
-git push -u origin main
-```
-
-注意不要提交真实 API Key。建议只提交 `.env.example`，不要提交 `.env`。
