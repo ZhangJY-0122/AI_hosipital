@@ -17,6 +17,10 @@ if "%MODEL_NAME%"=="" (
   set "MODEL_NAME=deepseek-chat"
 )
 
+if "%LIMIT%"=="" (
+  set "LIMIT=5"
+)
+
 set "PYTHONUTF8=1"
 
 python run.py ^
@@ -24,6 +28,7 @@ python run.py ^
   --doctor Agent.Doctor.GPT --doctor_openai_model_name %MODEL_NAME% ^
   --patient Agent.Patient.GPT --patient_openai_model_name %MODEL_NAME% ^
   --reporter Agent.Reporter.GPT --reporter_openai_model_name %MODEL_NAME% ^
-  --save_path outputs/dialog_history_iiyi/dialog_history_deepseek_final.jsonl ^
+  --save_path outputs/dialog_history_iiyi/deepseek_consultation_dialog_history.jsonl ^
+  --limit %LIMIT% ^
   --max_conversation_turn 1 ^
   --ff_print

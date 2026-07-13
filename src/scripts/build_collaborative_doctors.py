@@ -85,7 +85,7 @@ def main():
 
     patients = json.loads(args.patients.read_text(encoding="utf-8"))
     for profile in DOCTOR_PROFILES:
-        output_path = args.output_dir / f"dialog_history_{profile['key']}.jsonl"
+        output_path = args.output_dir / f"{profile['key']}_diagnoses.jsonl"
         write_jsonl(output_path, patients, profile)
         print(f"{output_path}: {len(patients)} records")
 

@@ -53,6 +53,7 @@ class CollaborativeConsultation:
         self.max_workers = args.max_workers
         self.save_path = args.save_path
         self.ff_print = args.ff_print
+        self.limit = args.limit
         self.start_time = time.strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
@@ -65,6 +66,7 @@ class CollaborativeConsultation:
         parser.add_argument("--max_workers", default=4, type=int, help="max workers for parallel diagnosis")
         parser.add_argument("--delay_between_tasks", default=10, type=int, help="delay between tasks")
         parser.add_argument("--save_path", default="dialog_history.jsonl", help="save path for dialog history")
+        parser.add_argument("--limit", default=None, type=int, help="max number of unprocessed patients to run")
 
         parser.add_argument("--patient", default="Agent.Patient.GPT", help="registry name of patient agent")
         parser.add_argument("--reporter", default="Agent.Reporter.GPT", help="registry name of reporter agent")
@@ -182,10 +184,17 @@ class CollaborativeConsultation:
                 self.patients.pop((patient_num-(i+1)))
         
         random.shuffle(self.patients)
+        if self.limit is not None:
+            if self.limit < 1:
+                raise ValueError("--limit must be greater than 0")
+            self.patients = self.patients[:self.limit]
         self.patients = self.patients
         print("To-be-diagnosed Patient Number: ", len(self.patients))
         
     def save_info(self, dialog_info):
+        save_dir = os.path.dirname(self.save_path)
+        if save_dir:
+            os.makedirs(save_dir, exist_ok=True)
         with jsonlines.open(self.save_path, "a") as f:
             f.write(dialog_info)
         f.close()

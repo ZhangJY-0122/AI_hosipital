@@ -45,6 +45,7 @@ class Consultation:
         self.max_workers = args.max_workers
         self.save_path = args.save_path
         self.ff_print = args.ff_print
+        self.limit = args.limit
         self.start_time = time.strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
@@ -58,6 +59,7 @@ class Consultation:
         parser.add_argument("--max_workers", default=4, type=int, help="max workers for parallel diagnosis")
         parser.add_argument("--delay_between_tasks", default=10, type=int, help="delay between tasks")
         parser.add_argument("--save_path", default="dialog_history.jsonl", help="save path for dialog history")
+        parser.add_argument("--limit", default=None, type=int, help="max number of unprocessed patients to run")
         parser.add_argument("--ff_print", default=False, action="store_true", help="print dialog history")
         parser.add_argument("--parallel", default=False, action="store_true", help="parallel diagnosis")
 
@@ -75,6 +77,10 @@ class Consultation:
                 self.patients.pop((patient_num-(i+1)))
             
         random.shuffle(self.patients)
+        if self.limit is not None:
+            if self.limit < 1:
+                raise ValueError("--limit must be greater than 0")
+            self.patients = self.patients[:self.limit]
         print("To-be-diagnosed Patient Number: ", len(self.patients))
 
     def run(self):
@@ -161,6 +167,9 @@ class Consultation:
         self.save_dialog_info(dialog_info)
     
     def save_dialog_info(self, dialog_info):
+        save_dir = os.path.dirname(self.save_path)
+        if save_dir:
+            os.makedirs(save_dir, exist_ok=True)
         with jsonlines.open(self.save_path, "a") as f:
             f.write(dialog_info)
         f.close()

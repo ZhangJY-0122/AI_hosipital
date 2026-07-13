@@ -1,5 +1,7 @@
 dashscope
 openai
+fastapi
+uvicorn
 bootstrapped
 transformers
 jsonlines

@@ -2,21 +2,21 @@
   {
     "doctor_name": "Agent.Doctor.GPT",
     "doctor_openai_model_name": "deepseek-chat",
-    "diagnosis_filepath": "./data/collaborative_doctors/dialog_history_deepseek_general.jsonl",
+    "diagnosis_filepath": "./data/collaborative_doctors/deepseek_general_diagnoses.jsonl",
     "evaluation_filepath": null,
     "doctor_key": null
   },
   {
     "doctor_name": "Agent.Doctor.GPT",
     "doctor_openai_model_name": "deepseek-chat",
-    "diagnosis_filepath": "./data/collaborative_doctors/dialog_history_deepseek_exam_focused.jsonl",
+    "diagnosis_filepath": "./data/collaborative_doctors/deepseek_exam_focused_diagnoses.jsonl",
     "evaluation_filepath": null,
     "doctor_key": null
   },
   {
     "doctor_name": "Agent.Doctor.GPT",
     "doctor_openai_model_name": "deepseek-chat",
-    "diagnosis_filepath": "./data/collaborative_doctors/dialog_history_deepseek_treatment.jsonl",
+    "diagnosis_filepath": "./data/collaborative_doctors/deepseek_treatment_diagnoses.jsonl",
     "evaluation_filepath": null,
     "doctor_key": null
   }

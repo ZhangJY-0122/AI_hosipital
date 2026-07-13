@@ -1,5 +1,8 @@
 .venv/
+web/node_modules/
+.pnpm-store/
 .idea/
+.DS_Store
 __pycache__/
 *.py[cod]
 *.log

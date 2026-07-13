@@ -10,7 +10,12 @@ import time
 class GPTEngine(Engine):
     def __init__(self, openai_api_key, openai_api_base=None, openai_model_name=None, temperature=0.0, max_tokens=1024, top_p=1, frequency_penalty=0, presence_penalty=0):
         openai_api_key = openai_api_key if openai_api_key is not None else os.environ.get('OPENAI_API_KEY')
-        assert openai_api_key is not None
+        if openai_api_key is None:
+            raise RuntimeError(
+                "OPENAI_API_KEY is required. For DeepSeek, set OPENAI_API_KEY "
+                "to your DeepSeek API key and OPENAI_API_BASE to "
+                "https://api.deepseek.com/v1."
+            )
         openai_api_base = openai_api_base if openai_api_base is not None else os.environ.get('OPENAI_API_BASE')
 
         self.model_name = openai_model_name

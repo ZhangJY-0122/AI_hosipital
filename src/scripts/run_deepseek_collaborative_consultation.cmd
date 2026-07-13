@@ -16,6 +16,10 @@ if "%MODEL_NAME%"=="" (
   set "MODEL_NAME=deepseek-chat"
 )
 
+if "%LIMIT%"=="" (
+  set "LIMIT=5"
+)
+
 set "PYTHONUTF8=1"
 
 python run.py ^
@@ -28,6 +32,7 @@ python run.py ^
   --number_of_doctors 3 ^
   --max_discussion_turn 2 ^
   --max_conversation_turn 1 ^
+  --limit %LIMIT% ^
   --save_path outputs/collaboration_history_iiyi/deepseek_collaboration_final.jsonl ^
   --discussion_mode Parallel_with_Critique ^
   --ff_print
